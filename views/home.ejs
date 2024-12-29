@@ -1,0 +1,166 @@
+<% layout('layout/boilerplate.ejs') %>
+
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #000;
+    color: #fff;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 1rem;
+    color: #000;
+    background-color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .cta-button:hover {
+    background-color: #e0e0e0;
+  }
+
+  .features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 40px 20px;
+    background-color: #fff;
+  }
+
+  .feature {
+    flex: 1 1 300px;
+    max-width: 300px;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .feature i {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #333;
+  }
+
+  .feature h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .feature p {
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .about-creator {
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+    text-align: center;
+  }
+
+  .about-creator img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+
+  .about-creator h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+
+  .about-creator p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  .about-creator a {
+    display: inline-block;
+    margin: 5px 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #000;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  .about-creator a:hover {
+    background-color: #333;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #000;
+    color: #fff;
+  }
+</style>
+
+<div class="hero">
+  <h1>Welcome to ChatIt</h1>
+  <p>Seamlessly connect with friends and groups in real time. Share moments, create memories.</p>
+  <a href="/signUp" class="cta-button">Sign Up Now</a>
+</div>
+
+<div class="features">
+  <div class="feature">
+    <i class="fas fa-comments"></i>
+    <h3>Real-Time Messaging</h3>
+    <p>Chat with individuals or groups instantly.</p>
+  </div>
+  <div class="feature">
+    <i class="fas fa-users"></i>
+    <h3>Group Chats</h3>
+    <p>Stay connected with your favorite groups.</p>
+  </div>
+  <div class="feature">
+    <i class="fas fa-image"></i>
+    <h3>Image Sharing</h3>
+    <p>Share images and make your chats more fun.</p>
+  </div>
+  <div class="feature">
+    <i class="fas fa-shield-alt"></i>
+    <h3>Secure and Reliable</h3>
+    <p>Your data is safe with authentication and authorization system.</p>
+  </div>
+</div>
+
+<div class="about-creator">
+  <img src="https://media.licdn.com/dms/image/v2/D5603AQHgNU7Ax9eIKg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1713442821809?e=1741219200&v=beta&t=ieZy84dhBjjjQDhMb7Idz08HaaxZrGTKGTt9kLCX93A" alt="Creator Image">
+  <h2>About the Creator</h2>
+  <p>"Hi, I'm Sachin, a passionate web developer with expertise in MERN stack. </br>I enjoy building scalable applications and solve real-world problems"</p>
+  <a href="https://sachin-kashi.onrender.com/" target="_blank">Portfolio</a>
+  <a href="https://github.com/sachinkashi21" target="_blank">GitHub</a>
+  <a href="https://www.linkedin.com/in/sachinkashi21/" target="_blank">LinkedIn</a>
+</div>
+
+<div class="footer">
+  <p>&copy; 2024 ChatIt. All rights reserved.</p>
+</div>

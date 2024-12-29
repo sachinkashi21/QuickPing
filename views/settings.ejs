@@ -1,0 +1,75 @@
+<%layout("layout/boilerplate.ejs")%>
+<style>
+    .settings-container {
+        max-width: 600px;
+        margin: auto;
+    }
+
+    .avatar-container {
+        position: relative;
+    }
+
+    .avatar-img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border: 3px solid #e0e0e0;
+    }
+
+    .avatar-container button {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+</style>
+
+<div class="container settings-container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body text-center">
+            <div class="avatar-container mb-3">
+                <img src="<%= user.avatar %>" alt="User Avatar" class="rounded-circle avatar-img" id="avatar-preview">
+                <button class="btn btn-sm btn-secondary mt-2" onclick="document.getElementById('avatar-input').click();">Edit Avatar</button>
+            </div>
+            <h5 class="card-title mt-2"><%= user.username %></h5>
+            <p class="card-text text-muted"><%= user.email %></p>
+        </div>
+    </div>
+
+    <!-- Avatar Upload Form -->
+    <div class="card mt-3 shadow-sm">
+        <div class="card-body">
+            <h6 class="card-title">Change Avatar</h6>
+            <form method="POST" action="/updateAvatar" enctype="multipart/form-data">
+                <input type="file" name="avatar" id="avatar-input" class="form-control mb-3" accept="image/*" style="display: none;" onchange="previewAvatar(event)">
+                <button type="submit" class="btn btn-dark w-100">Update Avatar</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="card mt-3 shadow-sm">
+        <div class="card-body">
+            <h6 class="card-title">Bio</h6>
+            <form method="POST" action="/updateBio">
+                <textarea class="form-control mb-3" rows="3" name="bio"><%= user.bio %></textarea>
+                <button type="submit" class="btn btn-dark w-100">Save Bio</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Function to preview the selected avatar image
+    function previewAvatar(event) {
+        const avatarPreview = document.getElementById('avatar-preview');
+        const file = event.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                avatarPreview.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+</script>

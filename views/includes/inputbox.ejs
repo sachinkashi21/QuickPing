@@ -1,0 +1,57 @@
+<div class="form col-10 col-md-6 offset-1 offset-md-3 ">
+    <form method="POST" action="/chats/<%=toUser._id%>" id="send-msg-form" autocomplete="off" enctype="multipart/form-data">
+        <!-- <input autocomplete="false" name="hidden" type="text" style="display:none;"> -->
+    
+        <input type="file" name="image" id="image-upload" accept="image/*" style="display: none;">
+        <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('image-upload').click();">
+          <i class="fa-solid fa-image"></i>
+        </button>
+    
+        <div id="image-preview-container" style="margin-top: 10px;">
+          <img id="image-preview" src="" alt="Selected Image Preview" style="max-width: 100px; max-height: 100px; display: none;">
+        </div>
+    
+        <input type="text" name="chat[content]" id="content-form" placeholder="Write your message here">
+        
+        <button class="form_submit"><i class="fa-solid fa-paper-plane"></i></button>
+    </form>
+    <div id="loading-indicator" style="display: none; text-align: center; margin-top: 10px;">
+      <i class="fa-solid fa-spinner fa-spin"></i> Sending...
+    </div>
+  </div>
+
+
+  <style>
+    #send-msg-form {
+      margin: auto 0;
+      margin-left: 1rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #content-form{
+      background-color: rgb(11,18,26);
+      color: rgb(242,242,244);
+      border: 0px;
+      width: 80%;
+      font-size: 1rem;
+    }
+
+    #content-fom:active{
+      background-color: red;
+    }
+
+    .form_submit {
+      display: block;
+      background-color: rgb(242, 242, 244);
+      color: rgb(11, 18, 26);
+      height: 3rem;
+      width: 3rem;
+      /* position: absolute; */
+      top: 0.15rem;
+      right: 0.15rem;
+      border-radius: 1.6rem;
+    }
+  </style>

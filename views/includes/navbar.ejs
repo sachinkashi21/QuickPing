@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg bg-dark text-white top-pannel">
+
+  <div class="container-fluid">
+    <a href="javascript:history.back()" class="btn btn-light btn-sm me-3 d-lg-none">
+      <i class="fas fa-arrow-left"></i>
+    </a>    
+    <a class="navbar-brand text-white" href="/">Chat It</a>
+    <button
+      class="navbar-toggler text-white"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/users">
+            <i class="fas fa-users"></i> Users
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/settings">
+            <i class="fas fa-cog"></i> Settings
+          </a>
+        </li>
+      </ul>
+      <%if(user){%>
+        <form class="d-flex nav-button" action="/logout">
+          <div class="me-3 d-none d-lg-block">
+            <img
+            src=<%=user.avatar%>
+            alt="User Avatar"
+            class="rounded-circle"
+            style="width: 40px; height: 40px;"
+            />
+          </div>
+          <button class="btn btn-light rounded-pill" type="submit">
+            Logout
+          </button>
+        </form>
+      <%} else{%>
+        <form class="d-flex nav-button m-1" action="/login">
+          <button class="btn btn-light rounded-pill" type="submit">
+            Login
+          </button>
+        </form>
+        <form class="d-flex nav-button" action="/signup">
+          <button class="btn btn-light rounded-pill" type="submit">
+            Register
+          </button>
+        </form>  
+      <%}%>  
+    </div>
+  </div>
+</nav>

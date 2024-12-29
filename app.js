@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express=require("express");
 const app=express();
 const port=8080;
@@ -12,16 +14,23 @@ app.set("view engine","ejs");
 app.use(express.static(path.join(__dirname,"/public")));
 app.use(express.urlencoded({extended:false}));
 
+const engine=require("ejs-mate");
+app.engine("ejs",engine);
+
 const methodOverride=require("method-override");
 app.use(methodOverride('_method'));
 
 const chatsRouter=require("./routes/chat.js");
 const usersRouter=require("./routes/user.js");
+const groupsRouter=require("./routes/group.js");
 
-require('dotenv').config();
 
-const dbUrl=process.env.ATLAS_URL;
 
+let dbUrl=process.env.ATLAS_URL;
+
+if(process.env.NODE_ENV==="dev"){
+    dbUrl="mongodb://127.0.0.1:27017/chatdb";
+}
 const mongoose=require("mongoose");
 main()
 .then((res)=>{
@@ -86,13 +95,12 @@ app.use((req,res,next)=>{
 });
 
 app.use("/",usersRouter);
-
 app.use("/chats",chatsRouter);
-
+app.use("/group",groupsRouter);
 
 
 app.get("/",(req,res)=>{
-    res.redirect("/signUp");
+   res.render("home.ejs",{user:req.user});
 });
 
 
@@ -100,26 +108,36 @@ const server=app.listen(port,()=>{
     console.log("server running "+port);
 });
 
-let socketConnected=new Set();
-
+// let socketConnected=new Set();
 const io= require('socket.io')(server);
-
+let roomMembers={};
 io.on('connection',onConnected);
 
 function onConnected(socket){
-    console.log(socket.id);
-    socketConnected.add(socket.id);
+    console.log(`Socket connected: ${socket.id}`);
 
-    io.emit("client-total", socketConnected.size);
+    socket.on("join-room", (roomId) => {
+        socket.join(roomId);
+        roomMembers[roomId] = roomMembers[roomId] || new Set();
+        roomMembers[roomId].add(socket.id);
+    
+        io.to(roomId).emit("client-total", roomMembers[roomId].size);
+    });
+
+    socket.on("message",({ roomId, Msg, uploadedImageUrl })=>{
+        socket.broadcast.to(roomId).emit("chat-message", { Msg, uploadedImageUrl });
+    })
 
     socket.on("disconnect",()=>{
         console.log("Socket diconnected", socket.id);
-        socketConnected.delete(socket.id);
-        io.emit("clients-total", socketConnected.size)
+        for (const roomId in roomMembers) {
+            if (roomMembers[roomId].has(socket.id)) {
+                roomMembers[roomId].delete(socket.id);
+                io.to(roomId).emit("client-total", roomMembers[roomId].size);
+            }
+        }
     })
 
-    socket.on("message",(Msg)=>{
-        socket.broadcast.emit("chat-message",Msg);
-    })
+    
 }
 
