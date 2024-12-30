@@ -52,7 +52,7 @@ Ensure you have the following installed:
 ## Deployment
 
 The application is live at:  
-[QuickPing Live](https://your-deployment-link.com)
+[QuickPing Live](https://quickping.onrender.com/)
 
 <!-- ## Guest Login Feature
 
