@@ -76,11 +76,14 @@ QuickPing/
 
 ## Screenshots
 
-### Homepage
-![Homepage](path/to/screenshot-homepage.png)
+### Home Page
+![Home Page](https://raw.githubusercontent.com/sachinkashi21/QuickPing/main/public/images/Home.png)
+
+### Users Page
+![Users Page](https://raw.githubusercontent.com/sachinkashi21/QuickPing/main/public/images/Users.png)
 
 ### Chat Interface
-![Chat Interface](path/to/screenshot-chat-interface.png)
+![Chat Interface](https://raw.githubusercontent.com/sachinkashi21/QuickPing/main/public/images/Chats.png)
 
 ## Demo Video
 
@@ -89,7 +92,7 @@ Watch the demo video here:
 
 ## About the Creator
 
-![Creator Image](https://media.licdn.com/dms/image/v2/D5603AQHgNU7Ax9eIKg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1713442821809?e=1741219200&v=beta&t=ieZy84dhBjjjQDhMb7Idz08HaaxZrGTKGTt9kLCX93A)
+<!-- ![Creator Image](https://media.licdn.com/dms/image/v2/D5603AQHgNU7Ax9eIKg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1713442821809?e=1741219200&v=beta&t=ieZy84dhBjjjQDhMb7Idz08HaaxZrGTKGTt9kLCX93A) -->
 
 - **Name:** Sachin A  
 - **Portfolio:** [Visit Portfolio](https://sachin-kashi.onrender.com/)  
