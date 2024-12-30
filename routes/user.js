@@ -20,16 +20,40 @@ router.route("/signUp")
 .get((req,res)=>{
     res.render("signUp.ejs",{user:req.user});
 })
-.post(async(req,res,next)=>{
-    let {username,email,password}=req.body;
+.post(async (req, res, next) => {
+    try {
+        let { username, email, password } = req.body;
 
-    let user=new User({
-        username,email
-    });
-    let regisUser=await User.register(user,password);
+        // Create a new user instance
+        let user = new User({ username, email });
 
-    res.redirect("/login");
-})
+        // Register the user with the specified password
+        let regisUser = await User.register(user, password);
+
+        if (regisUser) {
+            // Fetch the default group
+            let defaultGroup = await Group.findById("677253879d4fd6e4b7c7b4e5");
+
+            // Check if the group exists
+            if (!defaultGroup) {
+                throw new Error("Default group not found.");
+            }
+
+            // Add the registered user to the group's members array
+            defaultGroup.members.push(regisUser);
+
+            // Save the updated group
+            await defaultGroup.save();
+        }
+
+        // Redirect to the login page after successful registration
+        res.redirect("/login");
+    } catch (error) {
+        console.error("Error during registration:", error);
+        next(error); // Pass the error to the error handler
+    }
+});
+
 
 router.route("/login")
 .get((req,res)=>{
@@ -68,9 +92,9 @@ router.route("/settings")
 router.post("/updateBio",async(req,res)=>{
     let {bio}=req.body;
     let id=req.user.id;
-    console.log(bio,id);
+    // console.log(bio,id);
     let user=await User.findById(id);
-    console.log(user);
+    // console.log(user);
     let response=await User.findByIdAndUpdate(id,{bio:bio});
     // console.log(response)
     res.redirect("/settings");

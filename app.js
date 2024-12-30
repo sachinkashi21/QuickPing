@@ -28,9 +28,9 @@ const groupsRouter=require("./routes/group.js");
 
 let dbUrl=process.env.ATLAS_URL;
 
-if(process.env.NODE_ENV==="dev"){
-    dbUrl="mongodb://127.0.0.1:27017/chatdb";
-}
+// if(process.env.NODE_ENV==="dev"){
+//     dbUrl="mongodb://127.0.0.1:27017/chatdb";
+// }
 const mongoose=require("mongoose");
 main()
 .then((res)=>{
@@ -114,7 +114,7 @@ let roomMembers={};
 io.on('connection',onConnected);
 
 function onConnected(socket){
-    console.log(`Socket connected: ${socket.id}`);
+    // console.log(`Socket connected: ${socket.id}`);
 
     socket.on("join-room", (roomId) => {
         socket.join(roomId);
@@ -129,7 +129,7 @@ function onConnected(socket){
     })
 
     socket.on("disconnect",()=>{
-        console.log("Socket diconnected", socket.id);
+        // console.log("Socket diconnected", socket.id);
         for (const roomId in roomMembers) {
             if (roomMembers[roomId].has(socket.id)) {
                 roomMembers[roomId].delete(socket.id);

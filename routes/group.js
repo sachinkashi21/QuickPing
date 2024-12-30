@@ -21,7 +21,7 @@ router.route("/")
 .post(isLoggedIn, asyncWrap(async (req,res)=>{
     const { groupName, selectedUsers } = req.body;
     selectedUsers.push(req.user._id);
-    console.log(selectedUsers);
+    // console.log(selectedUsers);
 
     try {
         // Create the group (adjust based on your database schema)
@@ -30,7 +30,7 @@ router.route("/")
             members: Array.isArray(selectedUsers) ? selectedUsers : [selectedUsers],
             admin: req.user._id,
         });
-        console.log(group)
+        // console.log(group)
         res.redirect(`/chats/${group.id}`);
     } catch (error) {
         console.error(error);

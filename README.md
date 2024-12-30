@@ -87,16 +87,16 @@ QuickPing/
 
 ## Demo Video
 
-Watch the demo video here:  
-[Demo Video](https://your-demo-link.com)
+<!-- Watch the demo video here:  
+[Demo Video](https://your-demo-link.com) -->
 
-## About the Creator
+## About the Developer
 
 <!-- ![Creator Image](https://media.licdn.com/dms/image/v2/D5603AQHgNU7Ax9eIKg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1713442821809?e=1741219200&v=beta&t=ieZy84dhBjjjQDhMb7Idz08HaaxZrGTKGTt9kLCX93A) -->
 
 - **Name:** Sachin A  
 - **Portfolio:** [Visit Portfolio](https://sachin-kashi.onrender.com/)  
-- **GitHub:** [GitHub Profile](https://github.com/sachinkashi21/)  
+- **GitHub:** [GitHub Profile](https://github.com/sachinkashi21/)
 - **LinkedIn:** [LinkedIn Profile](https://www.linkedin.com/in/sachinkashi21/)  
 
 <!-- ## License

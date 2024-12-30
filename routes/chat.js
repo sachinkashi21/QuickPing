@@ -21,7 +21,7 @@ router.route("/:id")
     if(toUser==null){
         toUser=await Group.findOne({_id:id}).populate("members").populate("admin").populate("chats");
         let chats=await Chat.find({groupTo:id}).populate("from");
-        console.log(toUser);
+        //console.log(toUser);
         return res.render("chats.ejs",{chats,toUser,user:req.user});
     }
     let chats= await Chat.find( {$and:[ {$or:[ {to:id}, {from:id} ]}, {$or:[ {to:res.locals.currUser.id}, {from:res.locals.currUser.id} ]} ]} ).populate("to").populate("from");
@@ -40,7 +40,7 @@ router.route("/:id")
        newChat={content:Msg, to:id, from:req.user._id, date: new Date(), image: req.file?{url: req.file.path, filename: req.file.filename}:null};
     }
     let response=await Chat.insertMany([newChat]);
-    console.log(response);
+    //console.log(response);
     res.send(response);
 }))
 

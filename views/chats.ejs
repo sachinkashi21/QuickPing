@@ -1,75 +1,98 @@
 <% layout("layout/boilerplate.ejs") %>
 
-<div class="align">
-  <div class="row container-main">
-    <div class="box col-10 col-sm-6 col-lg-4 offset-1 offset-sm-3 offset-lg-4">
-      <h2 class="text-center py-3 rounded-top shadow-sm" style="background-color: #000; color: white; display: flex; align-items: center;">
-        <img
-          src="<%=toUser.avatar%>"
-          alt="User Avatar"
-          class="rounded-circle"
-          style="width: 40px; height: 40px; margin-right: 20px; margin-left: 20px; border: 2px solid white;"
-        />
-        <div style="flex-grow: 1; text-align: left;">
-          <span style="font-size: 1.2rem; font-weight: bold;"> <%= toUser.username || toUser.name %></span>
-          <br>
-          <span style="font-size: 0.9rem; color: #d0f8ce98;"> <%=toUser.bio%> </span>
-        </div>
-        <button 
-          class="btn btn-link p-0" 
-          style="color: white; font-size: 1.5rem; margin-right: 15px;"
-          onclick="window.location.href='/dashboard/<%=toUser.id%>'"
-        >
-          <i class="fa-solid fa-ellipsis-vertical"></i>
-        </button>
-      </h2>
-      
-      <% for(let i=0;i<chats.length;i++){ %>
-        <%if(chats[i].from.id===currUser.id){%><div class="chat chat-me"><%}
-        else{%> <div class="chat chat-you"><%}%>
-          <%if(chats[i].isGroup){%>
-            <p class="chat-name"><%=chats[i].from.username%></p>
-          <%}%>
-          <div class="content">
-            <%if(chats[i].image.url){%>
-                <img src="<%=chats[i].image.url%>" alt="Uploaded Image" class="chat-image" style="max-width: 250px; border-radius: 10px;">
-              <%}%>
-            <p><%= chats[i].content %></p>
+  <div class="align">
+    <div class="row container-main">
+      <div class="box col-10 col-sm-6 col-lg-4 offset-1 offset-sm-3 offset-lg-4">
+        <h2 class="text-center py-3 rounded-top shadow-sm"
+          style="background-color: #000; color: white; display: flex; align-items: center;">
+          <img src="<%=toUser.avatar%>" alt="User Avatar" class="rounded-circle"
+            style="width: 40px; height: 40px; margin-right: 20px; margin-left: 20px; border: 2px solid white;" />
+          <div style="flex-grow: 1; text-align: left;">
+            <span style="font-size: 1.2rem; font-weight: bold;">
+              <%= toUser.username || toUser.name %>
+            </span>
+            <br>
+            <span style="font-size: 0.9rem; color: #d0f8ce98;">
+              <%=toUser.bio%>
+            </span>
           </div>
-          <% let arr=chats[i].date.toString().split(" "); 
-          let date=arr[2]+" "+arr[1]+" , "+arr[3]+" ("+arr[0]+")"; %>
-          <p class="date"><%=date%></p>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <p class="date"><%= arr[4].slice(0,5)%></p>
+          <button class="btn btn-link p-0" style="color: white; font-size: 1.5rem; margin-right: 15px;"
+            onclick="window.location.href='/dashboard/<%=toUser.id%>'">
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+          </button>
+        </h2>
 
-          
+        <% for(let i=0;i<chats.length;i++){ %>
+          <%if(chats[i].from.id===currUser.id){%>
+            <div class="chat chat-me">
+              <%} else{%>
+                <div class="chat chat-you">
+                  <%if(chats[i].groupTo){%>
+                    <div class="d-flex align-items-center mb-1">
+                      <div class="avatar me-2">
+                        <% if (chats[i].from.avatar) { %>
+                          <img src="<%= chats[i].from.avatar %>" alt="Avatar" class="rounded-circle"
+                            style="width: 40px; height: 40px;">
+                          <% } else { let initials=chats[i].from.username.split(" ").map(word => word[0]).join("").toUpperCase(); %>
+                <div class=" avatar-placeholder bg-secondary text-white d-flex justify-content-center
+                            align-items-center rounded-circle" style="width: 40px; height: 40px;">
+                            <%= initials %>
+                      </div>
+                      <% } %>
+                    </div>
+                    <p class="mb-0 text-dark"><strong>
+                        <%= chats[i].from.username %>
+                      </strong></p>
+                </div>
+                <%}%>
+                  <%}%>
+                    <div class="content">
+                      <%if(chats[i].image.url){%>
+                        <img src="<%=chats[i].image.url%>" alt="Uploaded Image" class="chat-image"
+                          style="max-width: 250px; border-radius: 10px;">
+                        <%}%>
+                          <p>
+                            <%= chats[i].content %>
+                          </p>
+                    </div>
+                    <% let arr=chats[i].date.toString().split(" "); 
+            let date=arr[2]+" "+arr[1]+" , "+arr[3]+" ("+arr[0]+")"; %>
+                      <p class="date">
+                        <%=date%>
+                      </p>
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      <p class="date">
+                        <%= arr[4].slice(0,5)%>
+                      </p>
 
-        </div>
-      <% }%>
+
+
+            </div>
+            <% }%>
+      </div>
     </div>
-  </div>
 
     <%-include("./includes/inputbox.ejs")%>
-</div>
+  </div>
 
 
-<%if(toUser.admin){%>
-  <div id="isGroup" modelId="true" style="display: none;"></div>
-  <div id="groupId" modelId="<%=toUser.id%>" style="display: none;"></div>
-<%} else{%>
-  <div id="isGroup" modelId="false" style="display: none;"></div>
-  <div id="toUserId" modelId="<%=toUser.id%>" style="display: none;"></div>
-  <div id="fromUserId" modelId="<%=user.id%>" style="display: none;"></div>
-<%}%>
+  <%if(toUser.admin){%>
+    <div id="isGroup" modelId="true" style="display: none;"></div>
+    <div id="groupId" modelId="<%=toUser.id%>" style="display: none;"></div>
+    <%} else{%>
+      <div id="isGroup" modelId="false" style="display: none;"></div>
+      <div id="toUserId" modelId="<%=toUser.id%>" style="display: none;"></div>
+      <div id="fromUserId" modelId="<%=user.id%>" style="display: none;"></div>
+      <%}%>
 
 
 
-    
-    
-<script src="/socket.io/socket.io.js"></script>
-<script src="/client.js"></script>
 
-<script>
-  let msgCont = document.querySelector(".box");
-  msgCont.scrollTo(0, msgCont.scrollHeight);
-</script>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/client.js"></script>
+
+        <script>
+          let msgCont = document.querySelector(".box");
+          msgCont.scrollTo(0, msgCont.scrollHeight);
+        </script>
