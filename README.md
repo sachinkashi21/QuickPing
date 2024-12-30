@@ -1,6 +1,6 @@
 # QuickPing
 
-**ChatIt** is a personal project showcasing real-time chatting functionality. This application demonstrates expertise in the MERN stack, with additional features like group chatting, image sharing, and secure user authentication.
+**QuickPing** is a personal project showcasing real-time chatting functionality. This application demonstrates expertise in the MERN stack, with additional features like group chatting, image sharing, and secure user authentication.
 
 ## Features
 
@@ -56,7 +56,7 @@ The application is live at:
 
 <!-- ## Guest Login Feature
 
-ChatIt allows guest users to explore the app:
+QuickPing allows guest users to explore the app:
 - Click the **"Continue as Guest"** button on the login page.
 - One of 10 pre-configured guest accounts will be assigned automatically.
 - Ensures a smooth, conflict-free guest user experience. -->
